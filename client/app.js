@@ -72,7 +72,6 @@ var drawDNA = function(drawData){
       updateSvgPositions();
       drawData.nodes.forEach(function(d){
         d.fixed = true;
-        console.log(d);
       });
       drawDNA(drawData);
     });
@@ -80,8 +79,20 @@ var drawDNA = function(drawData){
   }else{
     // updateSvgPositions();
     $('button').on('click', function(){
-      //ajax post of drawData, on success append url to div with uniqueurl id
-      console.log('I have been clicked!');
+      $.ajax({
+        url: 'http://localhost:4568/getUniqueUrl',
+        type: 'POST',
+        contentType: 'text/plain',
+        data: JSON.stringify(drawData),
+        dataType: "text",
+        success: function(data){
+          var uniqueSuffix = JSON.parse(data).uniqueSuffix;
+          $('#uniqueurl').append('<div>http://localhost:4568/' + uniqueSuffix + '</div>');
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+          throw new Error(errorThrown);
+        }
+      })
     });
     spinner.stop();
   }        
