@@ -79,20 +79,7 @@ var drawDNA = function(drawData){
   }else{
     // updateSvgPositions();
     $('button').on('click', function(){
-      $.ajax({
-        url: 'http://localhost:4568/getUniqueUrl',
-        type: 'POST',
-        contentType: 'text/plain',
-        data: JSON.stringify(drawData),
-        dataType: "text",
-        success: function(data){
-          var uniqueSuffix = JSON.parse(data).uniqueSuffix;
-          $('#uniqueurl').append('<div>http://localhost:4568/' + uniqueSuffix + '</div>');
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-          throw new Error(errorThrown);
-        }
-      })
+      getAndRenderUniqueUrl(drawData);
     });
     spinner.stop();
   }        
@@ -100,6 +87,23 @@ var drawDNA = function(drawData){
   // force.on('tick', function(){
 
   // })
+};
+
+var getAndRenderUniqueUrl = function(graphData){
+  $.ajax({
+    url: 'http://localhost:4568/getUniqueUrl',
+    type: 'POST',
+    contentType: 'text/plain',
+    data: JSON.stringify(graphData),
+    dataType: "text",
+    success: function(data){
+      var uniqueSuffix = JSON.parse(data).uniqueSuffix;
+      $('#uniqueurl').append('<div>Unique URL is: <input value="http://localhost:4568/' + uniqueSuffix + '"></div>');
+    },
+    error: function(jqXHR, textStatus, errorThrown){
+      throw new Error(errorThrown);
+    }
+  });
 };
 
 drawDNA(sampleData);
