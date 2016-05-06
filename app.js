@@ -1,5 +1,5 @@
-var width = 640;
-var height = 480;
+var width = 1000;
+var height = 750;
 
 // var nodes = [
 //   {
@@ -107,8 +107,8 @@ var force = d3.layout.force()
             .size([width, height])
             .nodes(nodes)
             .links(links)
-            .charge(-75);
-            // .linkDistance(width/2);
+            .linkDistance(10)
+            .charge(-100);
 
 // var link = svg.selectAll('.link')
 //             .data(links)
@@ -139,10 +139,10 @@ var node = svg.selectAll('circle')
 
 
 force.on('tick', function(){
-  node.attr('cx', function(d){
+  node.attr('cx', function(d, i){
     return d.x;
   })
-  .attr('cy', function(d){
+  .attr('cy', function(d, i){
     return d.y;
   });
 
