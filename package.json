@@ -1,0 +1,25 @@
+{
+  "name": "d3dnaviewer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./server/server.js",
+  "scripts": {
+    "start": "./node_modules/.bin/nodemon --ignore node_modules ./server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/collinadams/d3DNAViewer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/collinadams/d3DNAViewer/issues"
+  },
+  "homepage": "https://github.com/collinadams/d3DNAViewer#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "node": "0.0.0",
+    "nodemon": "^1.9.2"
+  }
+}

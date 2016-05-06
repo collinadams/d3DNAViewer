@@ -1,31 +1,11 @@
-var spinner;
-
-var spinnerOptions = {
-  lines: 13,
-  length: 28,
-  width: 14,
-  radius: 42,
-  scale: 1,
-  corners: 1,
-  color: '#000',
-  opacity: 0.25,
-  rotate: 0,
-  direction: 1,
-  speed: 1,
-  trail: 60,
-  fps: 20,
-  zIndex: 2e9,
-  className: 'spinner',
-  top: '50%',
-  left: '50%',
-  shadow: false,
-  hwaccel: false ,
-  position: 'absolute',
-};
-
 var rawTestDNASequenceString = 'TTGGGGGGACTGGGGCTCCCATTCGTTGCCTTTATAAATCCTTGCAAGCCAATTAACAGGTTGGTGAGGGGCTTGGGTGAAAAGGTGCTTAAGACTCCGT';
 
 var rawTestDBN = '...(((((.(...).)))))........(((((.....((..(.((((((..(((.((...)).)))..)))))).).)))))))...............';
+
+var sampleData = {
+  nodes: dnaSequenceStringToArray(rawTestDNASequenceString),
+  links: findPairedBasesInDBA(rawTestDBN).concat(makeLinksForPhosphateBackbone(rawTestDBN))
+};
 
 var drawDNA = function(drawData){
   var width = 600;
@@ -98,7 +78,11 @@ var drawDNA = function(drawData){
     });
     force.start();
   }else{
-    updateSvgPositions();
+    // updateSvgPositions();
+    $('button').on('click', function(){
+      //ajax post of drawData, on success append url to div with uniqueurl id
+      console.log('I have been clicked!');
+    });
     spinner.stop();
   }        
 
@@ -107,10 +91,4 @@ var drawDNA = function(drawData){
   // })
 };
 
-var sampleData = {
-  nodes: dnaSequenceStringToArray(rawTestDNASequenceString),
-  links: findPairedBasesInDBA(rawTestDBN).concat(makeLinksForPhosphateBackbone(rawTestDBN))
-};
-
 drawDNA(sampleData);
-
