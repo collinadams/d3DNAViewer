@@ -2,6 +2,8 @@ var rawTestDNASequenceString = 'TTGGGGGGACTGGGGCTCCCATTCGTTGCCTTTATAAATCCTTGCAAG
 
 var rawTestDBN = '...(((((.(...).)))))........(((((.....((..(.((((((..(((.((...)).)))..)))))).).)))))))...............';
 
+$('#dbn').append('<span>' + rawTestDBN + '</span>');
+
 var sampleData = {
   nodes: dnaSequenceStringToArray(rawTestDNASequenceString),
   links: findPairedBasesInDBA(rawTestDBN).concat(makeLinksForPhosphateBackbone(rawTestDBN))
