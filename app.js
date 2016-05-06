@@ -106,7 +106,8 @@ var svg = d3.select('body').append('svg')
 var force = d3.layout.force()
             .size([width, height])
             .nodes(nodes)
-            .links(links);
+            .links(links)
+            .charge(-75);
             // .linkDistance(width/2);
 
 // var link = svg.selectAll('.link')
