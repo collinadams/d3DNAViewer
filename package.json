@@ -4,7 +4,7 @@
   "description": "",
   "main": "./server/server.js",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon --ignore node_modules ./server/server.js"
+    "start": "./node_modules/.bin/nodemon --ignore node_modules ./server.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "node": "0.0.0",
-    "nodemon": "^1.9.2"
+    "nodemon": "^1.9.2",
+    "path": "^0.12.7"
   }
 }
