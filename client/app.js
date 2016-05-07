@@ -17,23 +17,27 @@ $(document).on('ready', function(){
       }
     })
   }
-
-  var dnaSequencedEnteredByUser = $('#dnasequence').val();
-  var dbnEnteredByUser = $('#dbninput').val();
-  
-  $('#dbndisplay').append('<span>' + dbnEnteredByUser + '</span>');
   
   $('#moleculeviewerbutton').on('click', function(event){
     event.preventDefault();
+
+    $('svg').remove();
+    var dnaSequenceEnteredByUser = $('#dnasequence').val().toUpperCase();
+    var dbnEnteredByUser = $('#dbninput').val();
+    $('#dbndisplay').text('The DBN you entered is: ' + dbnEnteredByUser);
+
+    if(dnaSequenceEnteredByUser.length !== dbnEnteredByUser.length){
+      window.alert('The DNA sequence (length: ' + dnaSequenceEnteredByUser.length +') and DBN sequence (length: ' + dbnEnteredByUser.length + ') must have the same length.');
+      return;
+    }
+
+    var sampleData = {
+      nodes: dnaSequenceStringToArray(dnaSequenceEnteredByUser),
+      links: findPairedBasesInDBA(dbnEnteredByUser).concat(makeLinksForPhosphateBackbone(dbnEnteredByUser))
+    };
+
     drawDNA(sampleData);
   });
-
-
-
-  var sampleData = {
-    nodes: dnaSequenceStringToArray(dnaSequencedEnteredByUser),
-    links: findPairedBasesInDBA(dbnEnteredByUser).concat(makeLinksForPhosphateBackbone(dbnEnteredByUser))
-  };
 
   var drawDNA = function(drawData){
     var width = 600;
@@ -70,7 +74,8 @@ $(document).on('ready', function(){
                 .style('visibility', 'hidden');
 
     var updateSvgPositions = function(){
-      node.attr('cx', function(d, i){
+      node
+      .attr('cx', function(d, i){
         d.fixed = true;
         return d.x;
       })
@@ -80,7 +85,8 @@ $(document).on('ready', function(){
       })
       .style('visibility', 'visible');
 
-      link.attr('x1', function(d){
+      link
+      .attr('x1', function(d){
         d.fixed = true;
         return d.source.x;
       })
@@ -99,16 +105,12 @@ $(document).on('ready', function(){
       .style('visibility', 'visible');
     }; 
 
+    // force.on('tick', function(){
+    //   updateSvgPositions();
+    // });
+
     force.on('end', function(){
-      updateSvgPositions();
-      // drawData.links.forEach(function(d){
-      //   d.fixed = true;
-      // });
-      // drawData.nodes.forEach(function(d){
-      //   d.fixed = true;
-      // });
-      console.log('these are the nodes: ', drawData.nodes);
-      console.log('these are the links: ', drawData.links);        
+      updateSvgPositions();    
       $('#uniqueurlbutton').on('click', function(){
         renderUniqueUrl(drawData);
       });

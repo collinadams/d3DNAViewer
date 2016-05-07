@@ -32,9 +32,8 @@ var findIndexOfMatchingBase = function(DBNSubArray){
       parenCounter++;
     }else if(currCharacter === ')'){
       parenCounter--;
-    }else{
-      return 'The DBN String inputh contains an invalid character';
     }
+
     if(parenCounter === 0){
       return i;
     }
@@ -46,7 +45,10 @@ var findPairedBasesInDBA = function(DBNString){
   var DBNArray = DBNString.split('');
   for(var j = 0; j < DBNArray.length; j++){
     var currCharacter = DBNArray[j];
-    if(currCharacter === '('){
+    if(!(currCharacter === '.' || currCharacter === '(' || currCharacter === ')')){
+      window.alert('The DBN String inputh contains at least one invalid character');
+      throw new Error('The DBN String inputh contains at least one invalid character');
+    }else if(currCharacter === '('){
       var basePairSubArray = DBNArray.slice(j);
       arrayOfPairedBases.push({
         source: j,
