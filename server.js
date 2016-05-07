@@ -25,7 +25,6 @@ app.get('/', function(req, res){
 });
 
 app.post('/getUniqueUrl', function(req, res){
-  console.log(req.body.data);
   var userSubmittedDNAMolecule = req.body.data;
   var randomSuffix = generateRandomSuffix();
   while(mockDatabaseKeyValueStore[randomSuffix]){
@@ -35,7 +34,16 @@ app.post('/getUniqueUrl', function(req, res){
   res.send({uniqueSuffix: randomSuffix});
 });
 
+app.get('/*', function(req, res){
+  var uniqueSuffix = req.params[0];
+  var persistedState = mockDatabaseKeyValueStore[uniqueSuffix];
+  if(persistedState){
+    res.json({persistedState: persistedState});
+  }else{
+    res.status(404).send('The URL you requested is not in the database');
+  }
+});
+
 app.listen(port, function(){
-  console.log('this is dirname: ',__dirname);
   console.log('Now listening on port: ' + port);
 });

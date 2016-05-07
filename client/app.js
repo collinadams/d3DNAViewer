@@ -2,11 +2,13 @@ var rawTestDNASequenceString = 'TTGGGGGGACTGGGGCTCCCATTCGTTGCCTTTATAAATCCTTGCAAG
 
 var rawTestDBN = '...(((((.(...).)))))........(((((.....((..(.((((((..(((.((...)).)))..)))))).).)))))))...............';
 
-$('#dbn').append('<span>' + rawTestDBN + '</span>');
+var dnaSequencedEnteredByUser = $('#dnasequence').val();
+var dbnEnteredByUser = $('#dbninput').val();
+$('#dbndisplay').append('<span>' + dbnEnteredByUser + '</span>');
 
 var sampleData = {
-  nodes: dnaSequenceStringToArray(rawTestDNASequenceString),
-  links: findPairedBasesInDBA(rawTestDBN).concat(makeLinksForPhosphateBackbone(rawTestDBN))
+  nodes: dnaSequenceStringToArray(dnaSequencedEnteredByUser),
+  links: findPairedBasesInDBA(dbnEnteredByUser).concat(makeLinksForPhosphateBackbone(dbnEnteredByUser))
 };
 
 var drawDNA = function(drawData){
@@ -67,7 +69,8 @@ var drawDNA = function(drawData){
       return d.target.y;
     })
     .style('visibility', 'visible');
-  };     
+  }; 
+  console.log('just finished updating svg');    
 
   if(!alreadyPositioned){
     force.on('end', function(){
@@ -80,8 +83,8 @@ var drawDNA = function(drawData){
     force.start();
   }else{
     // updateSvgPositions();
-    $('button').on('click', function(){
-      getAndRenderUniqueUrl(drawData);
+    $('#uniqueurlbutton').on('click', function(){
+      renderUniqueUrl(drawData);
     });
     spinner.stop();
   }        
@@ -91,7 +94,7 @@ var drawDNA = function(drawData){
   // })
 };
 
-var getAndRenderUniqueUrl = function(graphData){
+var renderUniqueUrl = function(graphData){
   $.ajax({
     url: 'http://localhost:4568/getUniqueUrl',
     type: 'POST',
@@ -108,4 +111,8 @@ var getAndRenderUniqueUrl = function(graphData){
   });
 };
 
-drawDNA(sampleData);
+$('#moleculeviewerbutton').on('click', function(event){
+  event.preventDefault();
+  
+  drawDNA(sampleData);
+});

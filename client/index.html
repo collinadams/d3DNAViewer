@@ -10,9 +10,26 @@
   </head>
 
   <body>
-    <div id="dbn">This is the DBN: </div>
+    <div id="dbndisplay">This is the DBN you entered: </div>
+    <br>
+    <div id="dnaviewer">
+      <form id="dnaform">
+        <div>
+          <label> DNA Sequence: </label>
+          <input type="text" id="dnasequence" name="dnasequence" value="TTGGGGGGACTGGGGCTCCCATTCGTTGCCTTTATAAATCCTTGCAAGCCAATTAACAGGTTGGTGAGGGGCTTGGGTGAAAAGGTGCTTAAGACTCCGT">
+        </div>
+        <div>
+          <label> DBN: </label>
+          <input type="text" id="dbninput" name="dbninput" value="...(((((.(...).)))))........(((((.....((..(.((((((..(((.((...)).)))..)))))).).)))))))...............">
+        </div>
+        <div>
+          <input type="submit" id="moleculeviewerbutton" name="moleculeviewerbutton" value="View the DNA Structure">
+        </div>
+      </form>
+    </div>
+    <br>
     <div id="uniqueurl">
-      <button>Get Unique URL</button>
+      <button id="uniqueurlbutton">Get Unique URL</button>
     </div>
     <div id="spinner"></div>
     <script src="inputParsingHelpers.js"></script>
