@@ -40,15 +40,36 @@ var findIndexOfMatchingBase = function(DBNSubArray){
   }
 };
 
+var checkBalancedParens = function(DBNString){
+  var DBNArray = DBNString.split('');
+  var parensSoFar = [];
+  for(var i = 0; i < DBNArray.length; i++){
+    currCharacter = DBNArray[i];
+    if(!(currCharacter === '.' || currCharacter === '(' || currCharacter === ')')){
+      window.alert('The DBN String inputh contains at least one invalid character');
+      throw new Error('The DBN String inputh contains at least one invalid character');
+    }
+    if(currCharacter === '('){
+      parensSoFar.push(currCharacter);
+    }else if(currCharacter === ')'){
+      if(parensSoFar.pop() !== '('){
+        return false;
+      }
+    }
+  }
+  return parensSoFar.length === 0;
+};
+
 var findPairedBasesInDBA = function(DBNString){
+  if(!(checkBalancedParens(DBNString))){
+    window.alert('The parentheses in the DBN string are not balanced.');
+    throw new Error('The parentheses in the DBN string are not balanced.');
+  }
   var arrayOfPairedBases = [];
   var DBNArray = DBNString.split('');
   for(var j = 0; j < DBNArray.length; j++){
     var currCharacter = DBNArray[j];
-    if(!(currCharacter === '.' || currCharacter === '(' || currCharacter === ')')){
-      window.alert('The DBN String inputh contains at least one invalid character');
-      throw new Error('The DBN String inputh contains at least one invalid character');
-    }else if(currCharacter === '('){
+    if(currCharacter === '('){
       var basePairSubArray = DBNArray.slice(j);
       arrayOfPairedBases.push({
         source: j,
