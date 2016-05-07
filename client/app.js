@@ -38,12 +38,9 @@ $(document).on('ready', function(){
   var drawDNA = function(drawData){
     var width = 600;
     var height = 300;
-    var alreadyPositioned = !!(drawData.nodes && drawData.nodes[0].fixed);
 
-    if(!alreadyPositioned){
-      var target = document.getElementById('spinner');
-      spinner = new Spinner(spinnerOptions).spin(target);
-    }
+    var target = document.getElementById('spinner');
+    spinner = new Spinner(spinnerOptions).spin(target);
 
     var svg = d3.select('body').append('svg')
                 .attr('width', width)
@@ -56,10 +53,11 @@ $(document).on('ready', function(){
                 .linkDistance(8)
                 .charge(-30);
 
-    var link = svg.selectAll('.link')
+    var link = svg.selectAll('line')
                 .data(drawData.links)
                 .enter().append('line')
-                .attr('class', 'link')
+                .attr('stroke', '#777')
+                .attr('stroke-width', 2)
                 .style('visibility', 'hidden');
 
     var node = svg.selectAll('circle')
@@ -73,49 +71,50 @@ $(document).on('ready', function(){
 
     var updateSvgPositions = function(){
       node.attr('cx', function(d, i){
+        d.fixed = true;
         return d.x;
       })
       .attr('cy', function(d, i){
+        d.fixed = true;
         return d.y;
       })
       .style('visibility', 'visible');
 
       link.attr('x1', function(d){
+        d.fixed = true;
         return d.source.x;
       })
       .attr('y1', function(d){
+        d.fixed = true;
         return d.source.y;
       })
       .attr('x2', function(d){
+        d.fixed = true;
         return d.target.x;
       })
       .attr('y2', function(d){
+        d.fixed = true;
         return d.target.y;
       })
       .style('visibility', 'visible');
     }; 
-    console.log('just finished updating svg');    
 
-    if(!alreadyPositioned){
-      force.on('end', function(){
-        updateSvgPositions();
-        drawData.nodes.forEach(function(d){
-          d.fixed = true;
-        });
-        drawDNA(drawData);
-      });
-      force.start();
-    }else{
-      // updateSvgPositions();
+    force.on('end', function(){
+      updateSvgPositions();
+      // drawData.links.forEach(function(d){
+      //   d.fixed = true;
+      // });
+      // drawData.nodes.forEach(function(d){
+      //   d.fixed = true;
+      // });
+      console.log('these are the nodes: ', drawData.nodes);
+      console.log('these are the links: ', drawData.links);        
       $('#uniqueurlbutton').on('click', function(){
         renderUniqueUrl(drawData);
       });
       spinner.stop();
-    }        
-
-    // force.on('tick', function(){
-
-    // })
+    });
+    force.start();
   };
 
   var renderUniqueUrl = function(graphData){
@@ -127,7 +126,7 @@ $(document).on('ready', function(){
       dataType: "text",
       success: function(data){
         var uniqueSuffix = JSON.parse(data).uniqueSuffix;
-        $('#uniqueurl').append('<div>Unique URL is: <input value="http://localhost:4568/' + uniqueSuffix + '"></div>');
+        $('#uniqueurl').append('<span>Unique URL is: <input value="http://localhost:4568/' + uniqueSuffix + '"></span>');
       },
       error: function(jqXHR, textStatus, errorThrown){
         throw new Error(errorThrown);
