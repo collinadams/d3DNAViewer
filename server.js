@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/client'));
 
-var mockDatabaseKeyValueStore = {};
+var mockDatabase = {};
 
 var generateRandomSuffix = function(){
   var randomSuffix = '';
@@ -18,30 +18,30 @@ var generateRandomSuffix = function(){
     randomSuffix += Math.floor(Math.random() * 10);
   }
   return randomSuffix;
-}
-
-app.get('/', function(req, res){
-  res.sendFile(path.resolve('client/index.html'));
-});
+};
 
 app.post('/getUniqueUrl', function(req, res){
-  var userSubmittedDNAMolecule = req.body.data;
+  var userSubmittedDNAMolecule = req.body.graphdata;
   var randomSuffix = generateRandomSuffix();
-  while(mockDatabaseKeyValueStore[randomSuffix]){
+  while(mockDatabase[randomSuffix]){
     randomSuffix = generateRandomSuffix();
   }
-  mockDatabaseKeyValueStore[randomSuffix] = userSubmittedDNAMolecule;
+  mockDatabase[randomSuffix] = userSubmittedDNAMolecule;
   res.send({uniqueSuffix: randomSuffix});
 });
 
-app.get('/*', function(req, res){
-  var uniqueSuffix = req.params[0];
-  var persistedState = mockDatabaseKeyValueStore[uniqueSuffix];
-  if(persistedState){
-    res.json({persistedState: persistedState});
+app.post('/graphdata', function(req, res){
+  var uniqueSuffix = req.body.uniqueid;
+  var persistentGraphData = mockDatabase[uniqueSuffix];
+  if(persistentGraphData){
+    res.json({persistentGraphData: persistentGraphData});
   }else{
-    res.status(404).send('The URL you requested is not in the database');
+    res.status(404).send('The graph data you requested is not in the database');
   }
+});
+
+app.get('/*', function(req, res){
+  res.sendFile(path.resolve('client/index.html'));
 });
 
 app.listen(port, function(){
