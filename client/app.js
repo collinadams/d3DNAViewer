@@ -1,6 +1,8 @@
 $(document).on('ready', function(){
 
   var uniqueID = window.location.href.slice(22);
+  var dnaSequenceEnteredByUser = $('#dnasequence').val().toUpperCase();
+  var dbnEnteredByUser = $('#dbninput').val();
 
   if(!!(uniqueID)){
     $.ajax({
@@ -10,7 +12,10 @@ $(document).on('ready', function(){
       data: JSON.stringify({uniqueid: uniqueID}),
       dataType: 'text',
       success: function(data){
-        drawDNA(JSON.parse(data).persistentGraphData);
+        var persistentData = JSON.parse(data);
+        $('#dbnentered').text('The DBN you entered is: ' + persistentData.uniqueDBN);
+        $('#dnaentered').text('The DNA you entered is: ' + persistentData.uniqueDNA);
+        drawDNA(persistentData.uniqueGraphData);
       },
       error: function(jqXHR, textStatus, errorThrown){
         throw new Error(errorThrown);
@@ -22,21 +27,22 @@ $(document).on('ready', function(){
     event.preventDefault();
 
     $('svg').remove();
-    var dnaSequenceEnteredByUser = $('#dnasequence').val().toUpperCase();
-    var dbnEnteredByUser = $('#dbninput').val();
-    $('#dbndisplay').text('The DBN you entered is: ' + dbnEnteredByUser);
+    dnaSequenceEnteredByUser = $('#dnasequence').val().toUpperCase();
+    dbnEnteredByUser = $('#dbninput').val();
+    $('#dbnentered').text('The DBN you entered is: ' + dbnEnteredByUser);
+    $('#dnaentered').text('The DNA you entered is: ' + dnaSequenceEnteredByUser);
 
     if(dnaSequenceEnteredByUser.length !== dbnEnteredByUser.length){
       window.alert('The DNA sequence (length: ' + dnaSequenceEnteredByUser.length +') and DBN sequence (length: ' + dbnEnteredByUser.length + ') must have the same length.');
       return;
     }
 
-    var sampleData = {
+    var forceLayoutData = {
       nodes: dnaSequenceStringToArray(dnaSequenceEnteredByUser),
       links: findPairedBasesInDBA(dbnEnteredByUser).concat(makeLinksForPhosphateBackbone(dbnEnteredByUser))
     };
 
-    drawDNA(sampleData);
+    drawDNA(forceLayoutData);
   });
 
   var drawDNA = function(drawData){
@@ -112,19 +118,25 @@ $(document).on('ready', function(){
     force.on('end', function(){
       updateSvgPositions();    
       $('#uniqueurlbutton').on('click', function(){
-        renderUniqueUrl(drawData);
+        dnaSequenceEnteredByUser = $('#dnasequence').val().toUpperCase();
+        dbnEnteredByUser = $('#dbninput').val();
+        renderUniqueUrl(drawData, dnaSequenceEnteredByUser, dbnEnteredByUser);
       });
       spinner.stop();
     });
     force.start();
   };
 
-  var renderUniqueUrl = function(graphData){
+  var renderUniqueUrl = function(graphData, dnaSequence, dbn){
     $.ajax({
       url: 'http://localhost:4568/getUniqueUrl',
       type: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify({graphdata: graphData}),
+      data: JSON.stringify({
+        graphdata: graphData,
+        dna: dnaSequence,
+        dbn: dbn
+      }),
       dataType: "text",
       success: function(data){
         var uniqueSuffix = JSON.parse(data).uniqueSuffix;

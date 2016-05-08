@@ -21,12 +21,16 @@ var generateRandomSuffix = function(){
 };
 
 app.post('/getUniqueUrl', function(req, res){
-  var userSubmittedDNAMolecule = req.body.graphdata;
   var randomSuffix = generateRandomSuffix();
   while(mockDatabase[randomSuffix]){
     randomSuffix = generateRandomSuffix();
   }
-  mockDatabase[randomSuffix] = userSubmittedDNAMolecule;
+  var userSubmittedData = req.body;
+  mockDatabase[randomSuffix] = {
+    uniqueGraphData: userSubmittedData.graphdata,
+    uniqueDNA: userSubmittedData.dna,
+    uniqueDBN: userSubmittedData.dbn
+  };
   res.send({uniqueSuffix: randomSuffix});
 });
 
@@ -34,7 +38,7 @@ app.post('/graphdata', function(req, res){
   var uniqueSuffix = req.body.uniqueid;
   var persistentGraphData = mockDatabase[uniqueSuffix];
   if(persistentGraphData){
-    res.json({persistentGraphData: persistentGraphData});
+    res.json(persistentGraphData);
   }else{
     res.status(404).send('The graph data you requested is not in the database');
   }
