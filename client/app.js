@@ -14,13 +14,19 @@ $(document).on('ready', function(){
     $('svg').remove();
     dnaSequenceEnteredByUser = $('#dnasequence').val().toUpperCase();
     dbnEnteredByUser = $('#dbninput').val();
-    $('#dbnentered').text('The DBN you entered is: ' + dbnEnteredByUser);
-    $('#dnaentered').text('The DNA you entered is: ' + dnaSequenceEnteredByUser);
 
     if(dnaSequenceEnteredByUser.length !== dbnEnteredByUser.length){
       window.alert('The DNA sequence (length: ' + dnaSequenceEnteredByUser.length +') and DBN sequence (length: ' + dbnEnteredByUser.length + ') must have the same length.');
       return;
     }
+
+    if(dnaSequenceEnteredByUser.length === 0){
+      window.alert('You must enter a DNA sequence and a DBN sequence');
+      return;
+    }
+
+    $('#dnaentered').text('5\'-to-3\' DNA entered: ' + dnaSequenceEnteredByUser);
+    $('#dbnentered').text('5\'-to-3\' DBN entered: ' + dbnEnteredByUser);
 
     var forceLayoutData = {
       nodes: dnaSequenceStringToArray(dnaSequenceEnteredByUser),
@@ -30,3 +36,8 @@ $(document).on('ready', function(){
     drawDNA(forceLayoutData);
   });
 });
+
+// var sampleData = {
+//   dna: 'TTGGGGGGACTGGGGCTCCCATTCGTTGCCTTTATAAATCCTTGCAAGCCAATTAACAGGTTGGTGAGGGGCTTGGGTGAAAAGGTGCTTAAGACTCCGT',
+//   dbn: '...(((((.(...).)))))........(((((.....((..(.((((((..(((.((...)).)))..)))))).).)))))))...............'
+// };
