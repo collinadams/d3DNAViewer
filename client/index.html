@@ -17,11 +17,11 @@
       <form id="dnaform">
         <div>
           <label> DNA Sequence: </label>
-          <input type="text" id="dnasequence" name="dnasequence" placeholder="TTGGGGGGACTGGGGCTCCCATTCGTTGCCTTTATAAATCCTTGCAAGCCAATTAACAGGTTGGTGAGGGGCTTGGGTGAAAAGGTGCTTAAGACTCCGT">
+          <input type="text" id="dnasequence" name="dnasequence" placeholder="e.g. 'TTGGGGGGAC'">
         </div>
         <div>
           <label> DBN: </label>
-          <input type="text" id="dbninput" name="dbninput" placeholder="...(((((.(...).)))))........(((((.....((..(.((((((..(((.((...)).)))..)))))).).)))))))...............">
+          <input type="text" id="dbninput" name="dbninput" placeholder="e.g. '(..((.)).)'">
         </div>
         <div>
           <input type="submit" id="moleculeviewerbutton" name="moleculeviewerbutton" value="View the DNA Structure">
@@ -33,7 +33,9 @@
       <button id="uniqueurlbutton">Get Unique URL</button>
     </div>
     <div id="spinner"></div>
-    <script src="inputParsingHelpers.js"></script>
+    <script src="helpers/ajaxHelpers.js"></script>
+    <script src="helpers/d3Helpers.js"></script>
+    <script src="helpers/inputParsingHelpers.js"></script>
     <script src="spinner.js"></script>
     <script src="app.js"></script>
 

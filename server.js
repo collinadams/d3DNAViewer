@@ -12,14 +12,6 @@ app.use(express.static(__dirname + '/client'));
 
 var mockDatabase = {};
 
-var generateRandomSuffix = function(){
-  var randomSuffix = '';
-  for(var i = 0; i < 7; i++){
-    randomSuffix += Math.floor(Math.random() * 10);
-  }
-  return randomSuffix;
-};
-
 app.post('/getUniqueUrl', function(req, res){
   var randomSuffix = generateRandomSuffix();
   while(mockDatabase[randomSuffix]){
@@ -51,3 +43,11 @@ app.get('/*', function(req, res){
 app.listen(port, function(){
   console.log('Now listening on port: ' + port);
 });
+
+var generateRandomSuffix = function(){
+  var randomSuffix = '';
+  for(var i = 0; i < 7; i++){
+    randomSuffix += Math.floor(Math.random() * 10);
+  }
+  return randomSuffix;
+};

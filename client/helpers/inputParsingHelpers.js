@@ -20,8 +20,6 @@ var dnaSequenceStringToArray = function(dnaSequenceString){
   return dnaSequenceArray;
 };
 
-//the below function assumes that the dbnString input has balanced parens
-//TODO: optimize quadratic time complexity
 var findIndexOfMatchingBase = function(DBNSubArray){
   var parenCounter = 1;
   for(var i = 1; i < DBNSubArray.length; i++){
