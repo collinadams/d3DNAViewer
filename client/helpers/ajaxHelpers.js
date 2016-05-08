@@ -7,8 +7,8 @@ var renderPersistentData = function(uniqueID){
     dataType: 'text',
     success: function(data){
       var persistentData = JSON.parse(data);
-      $('#dnaentered').text('Current 5\'-to-3\' DNA: ' + persistentData.uniqueDNA);
-      $('#dbnentered').text('Current 5\'-to-3\' DBN: ' + persistentData.uniqueDBN);
+      $('#dnaentered').append('<span id="dnaletter' + i + '">' + persistentData.uniqueDNA[i] + '</span>');
+      $('#dbnentered').append('<span id="dbncharacter' + i + '">' + persistentData.uniqueDBN[i] + '</span>');
       drawDNA(persistentData.uniqueGraphData);
     },
     error: function(jqXHR, textStatus, errorThrown){

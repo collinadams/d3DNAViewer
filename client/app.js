@@ -25,8 +25,10 @@ $(document).on('ready', function(){
       return;
     }
 
-    $('#dnaentered').text('Current 5\'-to-3\' DNA: ' + dnaSequenceEnteredByUser);
-    $('#dbnentered').text('Current 5\'-to-3\' DBN: ' + dbnEnteredByUser);
+    for(var i = 0; i < dnaSequenceEnteredByUser.length; i++){
+      $('#dnaentered').append('<span id="dnaletter' + i + '">' + dnaSequenceEnteredByUser[i] + '</span>');
+      $('#dbnentered').append('<span id="dbncharacter' + i + '">' + dbnEnteredByUser[i] + '</span>');
+    }
 
     var forceLayoutData = {
       nodes: dnaSequenceStringToArray(dnaSequenceEnteredByUser),

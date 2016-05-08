@@ -50,9 +50,13 @@ var drawDNA = function(drawData){
     })
     .on('mouseover', function(d, i){
       d3.select(this).attr('fill', 'yellow');
+      $('#dnaletter' + i).css('background-color', 'yellow');
+      $('#dbncharacter' + i).css('background-color', 'yellow');
     })
     .on('mouseout', function(d, i){
       d3.select(this).attr('fill', d.color);
+      $('#dnaletter' + i).css('background-color', 'white');
+      $('#dbncharacter' + i).css('background-color', 'white');
     })
     .style('visibility', 'visible');
 
