@@ -24,7 +24,7 @@ $(document).on('ready', function(){
     }
 
     if(dnaSequenceEnteredByUser.length === 0){
-      window.alert('You must enter a DNA sequence and a DBN sequence');
+      window.alert('You must enter a DNA sequence and a DBN sequence.');
       return;
     }
 

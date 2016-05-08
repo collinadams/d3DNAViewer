@@ -7,8 +7,12 @@ var renderPersistentData = function(uniqueID){
     dataType: 'text',
     success: function(data){
       var persistentData = JSON.parse(data);
-      $('#dnaentered').append('<span id="dnaletter' + i + '">' + persistentData.uniqueDNA[i] + '</span>');
-      $('#dbnentered').append('<span id="dbncharacter' + i + '">' + persistentData.uniqueDBN[i] + '</span>');
+      $('#dnaentered').empty();
+      $('#dbnentered').empty();
+      for(var i = 0; i < persistentData.uniqueDNA.length; i++){
+        $('#dnaentered').append('<span id="dnaletter' + i + '">' + persistentData.uniqueDNA[i] + '</span>');
+        $('#dbnentered').append('<span id="dbncharacter' + i + '">' + persistentData.uniqueDBN[i] + '</span>');
+      }
       drawDNA(persistentData.uniqueGraphData);
     },
     error: function(jqXHR, textStatus, errorThrown){
