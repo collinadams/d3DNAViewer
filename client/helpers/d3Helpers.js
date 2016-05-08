@@ -1,6 +1,6 @@
 var drawDNA = function(drawData){
-  var width = 600;
-  var height = 300;
+  var width = 900;
+  var height = 450;
 
   var target = document.getElementById('spinner');
   spinner = new Spinner(spinnerOptions).spin(target);
@@ -13,12 +13,13 @@ var drawDNA = function(drawData){
               .size([width, height])
               .nodes(drawData.nodes)
               .links(drawData.links)
-              .linkDistance(8)
+              .linkDistance(17)
               .charge(-30);
 
   var link = svg.selectAll('line')
               .data(drawData.links)
-              .enter().append('line')
+              .enter()
+              .append('line')
               .attr('stroke', function(d, i){
                 if(i < drawData.nodes.length - 1){
                   return 'black';
@@ -29,32 +30,52 @@ var drawDNA = function(drawData){
               .attr('stroke-width', 2)
               .style('visibility', 'hidden');
 
-  var node = svg.selectAll('circle')
+  var node = svg.selectAll('.node')
               .data(drawData.nodes)
-              .enter().append('circle')
-              .attr('r', 4)
-              .attr('fill', function(d){
-                return d.color;
-              })
+              .enter()
+              .append('g')
+              .attr('class', 'node')
               .style('visibility', 'hidden');
+
+              node
+                .append("circle")
+                .attr('r', 4)
+                .attr('fill', function(d){
+                  return d.color;
+                });
+
+              node
+                .append("text")
+                .attr("dx", 12)
+                .attr("dy", ".35em")
+                .text(function(d, i){
+                  if(i === 0){
+                    return '5\' ' + d.nucleotideLetter;
+                  }else if(i === drawData.nodes.length - 1){
+                    return '3\' ' + d.nucleotideLetter;
+                  }else{
+                    return d.nucleotideLetter;
+                  }
+                });
 
   var updateSvgPositions = function(){
     node
-    .attr('cx', function(d, i){
+    .attr('x', function(d, i){
       d.fixed = true;
       return d.x;
     })
-    .attr('cy', function(d, i){
+    .attr('y', function(d, i){
       d.fixed = true;
       return d.y;
     })
+    .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
     .on('mouseover', function(d, i){
       d3.select(this).attr('fill', 'yellow');
       $('#dnaletter' + i).css('background-color', 'yellow');
       $('#dbncharacter' + i).css('background-color', 'yellow');
     })
     .on('mouseout', function(d, i){
-      d3.select(this).attr('fill', d.color);
+      d3.select(this).attr('fill', 'black');
       $('#dnaletter' + i).css('background-color', 'white');
       $('#dbncharacter' + i).css('background-color', 'white');
     })
@@ -79,10 +100,6 @@ var drawDNA = function(drawData){
     })
     .style('visibility', 'visible');
   }; 
-
-  // force.on('tick', function(){
-  //   updateSvgPositions();
-  // });
 
   force.on('end', function(){
     updateSvgPositions();    
