@@ -1,3 +1,11 @@
 .node text {
   font: 13px sans-serif;
 }
+
+ul.radio li {
+  display: inline;
+}
+
+ul {
+  display: inline;
+}

@@ -106,7 +106,11 @@ var drawDNA = function(drawData){
     $('#uniqueurlbutton').on('click', function(){
       dnaSequenceEnteredByUser = $('#dnasequence').val().toUpperCase();
       dbnEnteredByUser = $('#dbninput').val();
-      renderUniqueUrl(drawData, dnaSequenceEnteredByUser, dbnEnteredByUser);
+      adenineColor = $('input[name=adenine]:checked', '#dnaform').val();
+      thymineColor = $('input[name=thymine]:checked', '#dnaform').val();
+      cytosineColor = $('input[name=cytosine]:checked', '#dnaform').val();
+      guanineColor = $('input[name=guanine]:checked', '#dnaform').val();
+      renderUniqueUrl(drawData, dnaSequenceEnteredByUser, dbnEnteredByUser, adenineColor, thymineColor, cytosineColor, guanineColor);
     });
     spinner.stop();
   });

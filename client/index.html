@@ -18,12 +18,48 @@
     <div id="dnaviewer">
       <form id="dnaform">
         <div>
-          <label> Enter a 5'-to-3' DNA Sequence: </label>
+          <label>Enter a 5'-to-3' DNA Sequence: </label>
           <input type="text" id="dnasequence" name="dnasequence" placeholder="e.g. 'TTGGGGGGAC'">
         </div>
         <div>
-          <label> Enter a 5'-to-3' DBN: </label>
+          <label>Enter a 5'-to-3' DBN: </label>
           <input type="text" id="dbninput" name="dbninput" placeholder="e.g. '(..((.)).)'">
+        </div>
+        <div> 
+          <label>Adenine Color: </label> 
+            <ul class="radio"> 
+              <li><input type="radio" name="adenine" value="blue" id="adenine1" /><label for="adenine1">Blue</label></li> 
+              <li><input type="radio" name="adenine" value="black" id="adenine2" /><label for="adenine2">Black</label></li> 
+              <li><input type="radio" name="adenine" value="red" id="adenine3" /><label for="adenine3">Red</label></li> 
+              <li><input type="radio" name="adenine" value="green" id="adenine4" checked/><label for="adenine4">Green</label></li> 
+            </ul>  
+        </div>
+        <div> 
+          <label>Thymine Color: </label> 
+            <ul class="radio"> 
+              <li><input type="radio" name="thymine" value="blue" id="thymine1" /><label for="thymine1">Blue</label></li> 
+              <li><input type="radio" name="thymine" value="black" id="thymine2" /><label for="thymine2">Black</label></li> 
+              <li><input type="radio" name="thymine" value="red" id="thymine3" checked/><label for="thymine3">Red</label></li> 
+              <li><input type="radio" name="thymine" value="green" id="thymine4" /><label for="thymine4">Green</label></li> 
+            </ul>  
+        </div>
+        <div> 
+          <label>Cytosine Color: </label> 
+            <ul class="radio"> 
+              <li><input type="radio" name="cytosine" value="blue" id="cytosine1" checked/><label for="cytosine1">Blue</label></li> 
+              <li><input type="radio" name="cytosine" value="black" id="cytosine2" /><label for="cytosine2">Black</label></li> 
+              <li><input type="radio" name="cytosine" value="red" id="cytosine3" /><label for="cytosine3">Red</label></li> 
+              <li><input type="radio" name="cytosine" value="green" id="cytosine4" /><label for="cytosine4">Green</label></li> 
+            </ul>  
+        </div>
+        <div> 
+          <label>Guanine Color: </label> 
+            <ul class="radio"> 
+              <li><input type="radio" name="guanine" value="blue" id="guanine1" /><label for="guanine1">Blue</label></li> 
+              <li><input type="radio" name="guanine" value="black" id="guanine2" checked/><label for="guanine2">Black</label></li> 
+              <li><input type="radio" name="guanine" value="red" id="guanine3" /><label for="guanine3">Red</label></li> 
+              <li><input type="radio" name="guanine" value="green" id="guanine4" /><label for="guanine4">Green</label></li> 
+            </ul>  
         </div>
         <div>
           <input type="submit" id="moleculeviewerbutton" name="moleculeviewerbutton" value="View the DNA Structure">

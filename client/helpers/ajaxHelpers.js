@@ -7,8 +7,14 @@ var renderPersistentData = function(uniqueID){
     dataType: 'text',
     success: function(data){
       var persistentData = JSON.parse(data);
+
       $('#dnaentered').empty();
       $('#dbnentered').empty();
+      $('input[name=adenine][value=' + persistentData.uniqueAdenine + ']', '#dnaform').prop('checked', true);
+      $('input[name=thymine][value=' + persistentData.uniqueThymine + ']', '#dnaform').prop('checked', true);
+      $('input[name=cytosine][value=' + persistentData.uniqueCytosine + ']', '#dnaform').prop('checked', true);
+      $('input[name=guanine][value=' + persistentData.uniqueGuanine + ']', '#dnaform').prop('checked', true);
+
       for(var i = 0; i < persistentData.uniqueDNA.length; i++){
         $('#dnaentered').append('<span id="dnaletter' + i + '">' + persistentData.uniqueDNA[i] + '</span>');
         $('#dbnentered').append('<span id="dbncharacter' + i + '">' + persistentData.uniqueDBN[i] + '</span>');
@@ -21,7 +27,7 @@ var renderPersistentData = function(uniqueID){
   });
 };
 
-var renderUniqueUrl = function(graphData, dnaSequence, dbn){
+var renderUniqueUrl = function(graphData, dnaSequence, dbn, adenineColor, thymineColor, cytosineColor, guanineColor){
   $.ajax({
     url: 'http://localhost:4568/getUniqueUrl',
     type: 'POST',
@@ -29,7 +35,11 @@ var renderUniqueUrl = function(graphData, dnaSequence, dbn){
     data: JSON.stringify({
       graphdata: graphData,
       dna: dnaSequence,
-      dbn: dbn
+      dbn: dbn,
+      adenineColor: adenineColor,
+      thymineColor: thymineColor,
+      cytosineColor: cytosineColor,
+      guanineColor: guanineColor
     }),
     dataType: "text",
     success: function(data){

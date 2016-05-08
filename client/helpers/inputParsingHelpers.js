@@ -1,16 +1,16 @@
-var dnaSequenceStringToArray = function(dnaSequenceString){
+var dnaSequenceStringToArray = function(dnaSequenceString, adenineColor, thymineColor, cytosineColor, guanineColor){
   var dnaSequenceArray = dnaSequenceString
                           .split('')
                           .map(function(nucleotideLetter){
                             var nucleotideObject = {nucleotideLetter: nucleotideLetter};
                             if(nucleotideLetter === 'A'){
-                              nucleotideObject.color = 'green';
+                              nucleotideObject.color = adenineColor;
                             }else if(nucleotideLetter === 'C'){
-                              nucleotideObject.color = 'blue';
+                              nucleotideObject.color = cytosineColor;
                             }else if(nucleotideLetter === 'G'){
-                              nucleotideObject.color = 'black';
+                              nucleotideObject.color = guanineColor;
                             }else if(nucleotideLetter === 'T'){
-                              nucleotideObject.color = 'red';
+                              nucleotideObject.color = thymineColor;
                             }else if(nucleotideLetter === 'N'){
                               nucleotideObject.color = 'yellow';
                             }

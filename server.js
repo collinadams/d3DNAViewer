@@ -21,7 +21,11 @@ app.post('/getUniqueUrl', function(req, res){
   mockDatabase[randomSuffix] = {
     uniqueGraphData: userSubmittedData.graphdata,
     uniqueDNA: userSubmittedData.dna,
-    uniqueDBN: userSubmittedData.dbn
+    uniqueDBN: userSubmittedData.dbn,
+    uniqueAdenine: userSubmittedData.adenineColor,
+    uniqueThymine: userSubmittedData.thymineColor,
+    uniqueCytosine: userSubmittedData.cytosineColor,
+    uniqueGuanine: userSubmittedData.guanineColor
   };
   res.send({uniqueSuffix: randomSuffix});
 });
