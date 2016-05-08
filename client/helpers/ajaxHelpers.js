@@ -14,12 +14,13 @@ var renderPersistentData = function(uniqueID){
       $('input[name=thymine][value=' + persistentData.uniqueThymine + ']', '#dnaform').prop('checked', true);
       $('input[name=cytosine][value=' + persistentData.uniqueCytosine + ']', '#dnaform').prop('checked', true);
       $('input[name=guanine][value=' + persistentData.uniqueGuanine + ']', '#dnaform').prop('checked', true);
+      $('#noderadius').val(persistentData.uniqueNodeRadius);
 
       for(var i = 0; i < persistentData.uniqueDNA.length; i++){
         $('#dnaentered').append('<span id="dnaletter' + i + '">' + persistentData.uniqueDNA[i] + '</span>');
         $('#dbnentered').append('<span id="dbncharacter' + i + '">' + persistentData.uniqueDBN[i] + '</span>');
       }
-      drawDNA(persistentData.uniqueGraphData);
+      drawDNA(persistentData.uniqueGraphData, persistentData.uniqueNodeRadius);
     },
     error: function(jqXHR, textStatus, errorThrown){
       throw new Error(errorThrown);
@@ -27,7 +28,7 @@ var renderPersistentData = function(uniqueID){
   });
 };
 
-var renderUniqueUrl = function(graphData, dnaSequence, dbn, adenineColor, thymineColor, cytosineColor, guanineColor){
+var renderUniqueUrl = function(graphData, dnaSequence, dbn, adenineColor, thymineColor, cytosineColor, guanineColor, nodeRadius){
   $.ajax({
     url: 'http://localhost:4568/getUniqueUrl',
     type: 'POST',
@@ -39,7 +40,8 @@ var renderUniqueUrl = function(graphData, dnaSequence, dbn, adenineColor, thymin
       adenineColor: adenineColor,
       thymineColor: thymineColor,
       cytosineColor: cytosineColor,
-      guanineColor: guanineColor
+      guanineColor: guanineColor,
+      nodeRadius: nodeRadius
     }),
     dataType: "text",
     success: function(data){

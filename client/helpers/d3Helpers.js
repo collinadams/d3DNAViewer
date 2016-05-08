@@ -1,4 +1,4 @@
-var drawDNA = function(drawData){
+var drawDNA = function(drawData, nodeRadius){
   var width = 900;
   var height = 450;
 
@@ -39,7 +39,7 @@ var drawDNA = function(drawData){
 
               node
                 .append("circle")
-                .attr('r', 4)
+                .attr('r', nodeRadius)
                 .attr('fill', function(d){
                   return d.color;
                 });
@@ -110,7 +110,7 @@ var drawDNA = function(drawData){
       thymineColor = $('input[name=thymine]:checked', '#dnaform').val();
       cytosineColor = $('input[name=cytosine]:checked', '#dnaform').val();
       guanineColor = $('input[name=guanine]:checked', '#dnaform').val();
-      renderUniqueUrl(drawData, dnaSequenceEnteredByUser, dbnEnteredByUser, adenineColor, thymineColor, cytosineColor, guanineColor);
+      renderUniqueUrl(drawData, dnaSequenceEnteredByUser, dbnEnteredByUser, adenineColor, thymineColor, cytosineColor, guanineColor, nodeRadius);
     });
     spinner.stop();
   });
