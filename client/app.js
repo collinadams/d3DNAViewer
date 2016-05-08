@@ -25,8 +25,8 @@ $(document).on('ready', function(){
       return;
     }
 
-    $('#dnaentered').text('5\'-to-3\' DNA entered: ' + dnaSequenceEnteredByUser);
-    $('#dbnentered').text('5\'-to-3\' DBN entered: ' + dbnEnteredByUser);
+    $('#dnaentered').text('Current 5\'-to-3\' DNA: ' + dnaSequenceEnteredByUser);
+    $('#dbnentered').text('Current 5\'-to-3\' DBN: ' + dbnEnteredByUser);
 
     var forceLayoutData = {
       nodes: dnaSequenceStringToArray(dnaSequenceEnteredByUser),

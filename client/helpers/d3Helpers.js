@@ -48,6 +48,12 @@ var drawDNA = function(drawData){
       d.fixed = true;
       return d.y;
     })
+    .on('mouseover', function(d, i){
+      d3.select(this).attr('fill', 'yellow');
+    })
+    .on('mouseout', function(d, i){
+      d3.select(this).attr('fill', d.color);
+    })
     .style('visibility', 'visible');
 
     link
