@@ -19,7 +19,13 @@ var drawDNA = function(drawData){
   var link = svg.selectAll('line')
               .data(drawData.links)
               .enter().append('line')
-              .attr('stroke', '#777')
+              .attr('stroke', function(d, i){
+                if(i < drawData.nodes.length - 1){
+                  return 'black';
+                }else{
+                  return '#808080';
+                }
+              })
               .attr('stroke-width', 2)
               .style('visibility', 'hidden');
 

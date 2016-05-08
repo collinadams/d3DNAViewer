@@ -13,11 +13,11 @@ app.use(express.static(__dirname + '/client'));
 var mockDatabase = {};
 
 app.post('/getUniqueUrl', function(req, res){
+  var userSubmittedData = req.body;
   var randomSuffix = generateRandomSuffix();
   while(mockDatabase[randomSuffix]){
     randomSuffix = generateRandomSuffix();
   }
-  var userSubmittedData = req.body;
   mockDatabase[randomSuffix] = {
     uniqueGraphData: userSubmittedData.graphdata,
     uniqueDNA: userSubmittedData.dna,

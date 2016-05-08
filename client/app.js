@@ -30,7 +30,7 @@ $(document).on('ready', function(){
 
     var forceLayoutData = {
       nodes: dnaSequenceStringToArray(dnaSequenceEnteredByUser),
-      links: findPairedBasesInDBA(dbnEnteredByUser).concat(makeLinksForPhosphateBackbone(dbnEnteredByUser))
+      links: makeLinksForPhosphateBackbone(dbnEnteredByUser).concat(findPairedBasesInDBA(dbnEnteredByUser))
     };
 
     drawDNA(forceLayoutData);
