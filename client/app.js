@@ -12,6 +12,9 @@ $(document).on('ready', function(){
     event.preventDefault();
 
     $('svg').remove();
+    $('#dnaentered').empty();
+    $('#dbnentered').empty();
+
     dnaSequenceEnteredByUser = $('#dnasequence').val().toUpperCase();
     dbnEnteredByUser = $('#dbninput').val();
 
