@@ -24,7 +24,7 @@ Features
 
 Technology Stack
 ==========
-JavaScript, D3, jQuery, Node/Express
+JavaScript, D3, jQuery, Node/Express, Mocha/Chai
 
 Installation
 =============
@@ -39,7 +39,7 @@ Then navigate the browser to: http://localhost:4568/
 
 Testing
 =============
-11 Mocha/Chai/Supertest server-side tests. To launch testing suite, run this command from the terminal:
+This product includes 11 server-side integration and 10 client-side unit tests in Mocha/Chai. To launch all tests, run this command from the terminal:
 ```
 $ npm test
 ```
@@ -57,6 +57,9 @@ d3DNAViewer
     |---index.html                    # Single page user input form
     |---assets                        # Styleseet, spinner animation for build status and, demo screenshots 
   |-server.js                         # Node/Express server, middleware, routing, and mock database
+  |-test
+    |---clientUnitTests               # Ten client-side unit tests
+    |---serverIntegrationTests        # Eleven server-side integration tests
 
 ```
 
