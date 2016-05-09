@@ -57,7 +57,7 @@ d3DNAViewer
     |---index.html                    # Single page user input form
     |---assets                        # Styleseet, spinner animation for build status and, demo screenshots 
   |-server.js                         # Node/Express server, middleware, routing, and mock database
-  |-test
+  |-tests
     |---clientUnitTests               # Ten client-side unit tests
     |---serverIntegrationTests        # Eleven server-side integration tests
 
