@@ -17,8 +17,8 @@ Features
 - Each base in the visualization is labeled (A, T, C, or G) and colored (Red, Blue, Green, or Black).
 - The original DNA and DBN sequences are displayed side-by-side with the molecule visualization.
 - The 5' and 3' ends of the DNA sequence are annotated.
-- Phosphate backbone connections are visually differentiated from base pair complements.
-- Users select colors for each nucleotide base, size of the nucleotide nodes, label font, and link width.
+- Phosphate backbone connections (black) are visually differentiated from base pair complements (gray).
+- Users select size of the nucleotide nodes, label font, link width, and colors for each nucleotide base.
 - When hovering over a base in the graph, the corresponding base is highlighted in the DNA and DBN sequences.
 - At the click of a button, users receive a uniquely customized URL that persists the state of the graph. Just navigating to that URL opens the exact same view.
 
