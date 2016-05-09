@@ -40,7 +40,7 @@ Then navigate the browser to: http://localhost:4568/
 File Architecture
 ==========
 ```
-BarHawk
+d3DNAViewer
   |-client
     |---app.js                        # High-level variables, DOM event listeners, input validation
     |---helpers
