@@ -91,3 +91,11 @@ var makeLinksForPhosphateBackbone = function(DBNString){
   }
   return arrayOfPhosphateBackboneLinks;
 };
+
+module.exports = {
+  dnaSequenceStringToArray: dnaSequenceStringToArray,
+  findIndexOfMatchingBase: findIndexOfMatchingBase,
+  checkBalancedParens: checkBalancedParens,
+  findPairedBasesInDBA: findPairedBasesInDBA,
+  makeLinksForPhosphateBackbone: makeLinksForPhosphateBackbone
+};

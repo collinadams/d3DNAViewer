@@ -37,6 +37,13 @@ $ npm start
 ```
 Then navigate the browser to: http://localhost:4568/
 
+Testing
+=============
+11 Mocha/Chai/Supertest server-side tests. To launch testing suite, run this command from the terminal:
+```
+$ npm test
+```
+
 File Architecture
 ==========
 ```
@@ -48,9 +55,8 @@ d3DNAViewer
       |-----d3Helpers.js              # Helper functions for building Force Layout
       |-----inputParsingHelpers.js    # Helper functions for packaging genetic big data
     |---index.html                    # Single page user input form
-    |---style.css                     # Stylesheet
+    |---assets                        # Styleseet, spinner animation for build status and, demo screenshots 
   |-server.js                         # Node/Express server, middleware, routing, and mock database
-  |-assets                            # Styleseet, spinner animation for build status and, demo screenshots 
 
 ```
 

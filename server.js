@@ -58,3 +58,5 @@ var generateRandomSuffix = function(){
   }
   return randomSuffix;
 };
+
+module.exports = app;
