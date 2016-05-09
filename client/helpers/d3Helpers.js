@@ -111,7 +111,6 @@ var drawDNA = function(drawData, nodeRadius, linkWidth, fontFamily){
       thymineColor = $('input[name=thymine]:checked', '#dnaform').val();
       cytosineColor = $('input[name=cytosine]:checked', '#dnaform').val();
       guanineColor = $('input[name=guanine]:checked', '#dnaform').val();
-      console.log('this is drawData', drawData);
       renderUniqueUrl(drawData, dnaSequenceEnteredByUser, dbnEnteredByUser, adenineColor, thymineColor, cytosineColor, guanineColor, nodeRadius, linkWidth, fontFamily);
     });
     spinner.stop();
