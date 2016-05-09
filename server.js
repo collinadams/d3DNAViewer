@@ -26,7 +26,9 @@ app.post('/getUniqueUrl', function(req, res){
     uniqueThymine: userSubmittedData.thymineColor,
     uniqueCytosine: userSubmittedData.cytosineColor,
     uniqueGuanine: userSubmittedData.guanineColor,
-    uniqueNodeRadius: userSubmittedData.nodeRadius
+    uniqueNodeRadius: userSubmittedData.nodeRadius,
+    uniqueLinkWidth: userSubmittedData.linkWidth,
+    uniqueFontFamily: userSubmittedData.fontFamily
   };
   res.send({uniqueSuffix: randomSuffix});
 });

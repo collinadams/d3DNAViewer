@@ -1,4 +1,4 @@
-var drawDNA = function(drawData, nodeRadius){
+var drawDNA = function(drawData, nodeRadius, linkWidth, fontFamily){
   var width = 900;
   var height = 450;
 
@@ -13,7 +13,7 @@ var drawDNA = function(drawData, nodeRadius){
               .size([width, height])
               .nodes(drawData.nodes)
               .links(drawData.links)
-              .linkDistance(17)
+              .linkDistance(linkWidth)
               .charge(-30);
 
   var link = svg.selectAll('line')
@@ -38,16 +38,17 @@ var drawDNA = function(drawData, nodeRadius){
               .style('visibility', 'hidden');
 
               node
-                .append("circle")
+                .append('circle')
                 .attr('r', nodeRadius)
                 .attr('fill', function(d){
                   return d.color;
                 });
 
               node
-                .append("text")
-                .attr("dx", 12)
-                .attr("dy", ".35em")
+                .append('text')
+                .attr('dx', 12)
+                .attr('dy', '.35em')
+                .attr('font-family', fontFamily)
                 .text(function(d, i){
                   if(i === 0){
                     return '5\' ' + d.nucleotideLetter;
@@ -68,7 +69,7 @@ var drawDNA = function(drawData, nodeRadius){
       d.fixed = true;
       return d.y;
     })
-    .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+    .attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; })
     .on('mouseover', function(d, i){
       d3.select(this).attr('fill', 'yellow');
       $('#dnaletter' + i).css('background-color', 'yellow');
@@ -110,7 +111,7 @@ var drawDNA = function(drawData, nodeRadius){
       thymineColor = $('input[name=thymine]:checked', '#dnaform').val();
       cytosineColor = $('input[name=cytosine]:checked', '#dnaform').val();
       guanineColor = $('input[name=guanine]:checked', '#dnaform').val();
-      renderUniqueUrl(drawData, dnaSequenceEnteredByUser, dbnEnteredByUser, adenineColor, thymineColor, cytosineColor, guanineColor, nodeRadius);
+      renderUniqueUrl(drawData, dnaSequenceEnteredByUser, dbnEnteredByUser, adenineColor, thymineColor, cytosineColor, guanineColor, nodeRadius, linkWidth, fontFamily);
     });
     spinner.stop();
   });

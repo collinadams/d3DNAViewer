@@ -8,6 +8,8 @@ $(document).on('ready', function(){
   var cytosineColor = $('input[name=cytosine]:checked', '#dnaform').val();
   var guanineColor = $('input[name=guanine]:checked', '#dnaform').val();
   var nodeRadius = $('#noderadius').val();
+  var linkWidth = $('#linkwidth option:selected').val();
+  var fontFamily = $('#fontfamily option:selected').val();
 
   if(!!(uniqueID)){
     renderPersistentData(uniqueID);
@@ -19,6 +21,7 @@ $(document).on('ready', function(){
     event.preventDefault();
 
     $('svg').remove();
+    $('#uniqueurl').empty();
     $('#dnaentered').empty();
     $('#dbnentered').empty();
 
@@ -30,6 +33,9 @@ $(document).on('ready', function(){
     cytosineColor = $('input[name=cytosine]:checked', '#dnaform').val();
     guanineColor = $('input[name=guanine]:checked', '#dnaform').val();
     nodeRadius = $('#noderadius').val();
+    linkWidth = $('#linkwidth option:selected').val();
+    fontFamily = $('#fontfamily option:selected').val();
+
 
     if(dnaSequenceEnteredByUser.length !== dbnEnteredByUser.length){
       window.alert('The DNA sequence (length: ' + dnaSequenceEnteredByUser.length +') and DBN sequence (length: ' + dbnEnteredByUser.length + ') must have the same length.');
@@ -62,7 +68,7 @@ $(document).on('ready', function(){
       links: makeLinksForPhosphateBackbone(dbnEnteredByUser).concat(findPairedBasesInDBA(dbnEnteredByUser))
     };
 
-    drawDNA(forceLayoutData, nodeRadius);
+    drawDNA(forceLayoutData, nodeRadius, linkWidth, fontFamily);
   });
 });
 

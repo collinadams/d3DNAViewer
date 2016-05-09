@@ -27,7 +27,23 @@
         </div>
         <div>
           <label>Base Node Radius: </label>
-          <input type="text" id="noderadius" name="noderadius" placeholder="e.g. 4-8"> px
+          <input type="text" id="noderadius" name="noderadius" placeholder="e.g. 2-7"> px
+        </div>
+        <div>
+          <label>Link Width: </label>
+          <select id="linkwidth" name="linkwidth"> px
+            <option value="11">11px</option>
+            <option value="13">13px</option>
+            <option value="15">15px</option>
+            <option value="17" selected>17px</option>
+          </select>
+        </div>
+        <div>
+          <label>Font Family: </label>
+          <select id="fontfamily" name="fontfamily">
+            <option value="Courier" selected>Courier</option>
+            <option value="sans-serif">Sans-Serif</option>
+          </select>
         </div>
         <div> 
           <label>Adenine Color: </label> 
@@ -71,8 +87,8 @@
       </form>
     </div>
     <br>
-    <div id="uniqueurl">
-      <button id="uniqueurlbutton">Get Unique URL</button>
+    <div>
+      <button id="uniqueurlbutton">Get Unique URL</button><span id="uniqueurl"></span>
     </div>
     <div id="spinner"></div>
     <script src="helpers/ajaxHelpers.js"></script>
